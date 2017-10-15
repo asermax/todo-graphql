@@ -7,7 +7,7 @@ module.exports = {
   entry: {
     app: [
       'react-hot-loader/patch',
-      resolve(__dirname, 'index.jsx'),
+      resolve(__dirname, 'src', 'index.jsx'),
     ],
   },
 
@@ -66,7 +66,7 @@ module.exports = {
 
   resolve: {
     modules: [
-      resolve(__dirname),
+      resolve(__dirname, 'src'),
       'node_modules',
     ],
     extensions: [ '.js', '.jsx' ],
