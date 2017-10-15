@@ -44,7 +44,7 @@
     "bootstrap": "4.0.0-beta",
     "classnames": "^2.2.5",
     "es6-promise": "^4.x",
-    "font-awesome": "^4.x",
+    "font-awesome": "^4.7.0",
     "graphql-tag": "^2.3.0",
     "history": "^4.6.2",
     "moment": "^2.18.1",

@@ -7,14 +7,12 @@ module.exports = {
   entry: {
     app: [
       'react-hot-loader/patch',
-      resolve(__dirname, 'src', 'patches', 'react-contenteditable-patch.js'),
-      resolve(__dirname, 'src', 'patches', 'moment-locale-patch.js'),
-      resolve(__dirname, 'src', 'index.jsx'),
+      resolve(__dirname, 'index.jsx'),
     ],
   },
 
   output: {
-    filename: 'bundle.js',
+    filename: '[name].js',
     path: resolve(__dirname, 'dist'),
     publicPath: '/',
   },
@@ -23,14 +21,14 @@ module.exports = {
     rules: [
       {
         test: /\.jsx?$/,
+        exclude: /node_modules/,
         use: [
           'babel-loader',
         ],
-        exclude: /node_modules/,
       },
       {
-        test: /\.s?[ca]ss$/,
-        include: /node_modules/,
+        test: /.s?[ca]ss$/,
+        include: /-global/,
         use: [
           'style-loader',
           'css-loader',
@@ -39,8 +37,8 @@ module.exports = {
         ],
       },
       {
-        test: /\.s?[ca]ss$/,
-        exclude: /node_modules/,
+        test: /.s?[ca]ss$/,
+        exclude: /-global/,
         use: [
           'style-loader',
           {
@@ -68,7 +66,7 @@ module.exports = {
 
   resolve: {
     modules: [
-      resolve(__dirname, 'src'),
+      resolve(__dirname),
       'node_modules',
     ],
     extensions: [ '.js', '.jsx' ],
