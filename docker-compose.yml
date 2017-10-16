@@ -12,4 +12,4 @@ services:
       - PORT=80
       - MONGO_URL=mongodb://db:27017/todo
   db:
-    image: mongo:3.5
+    image: mongo:3.4
