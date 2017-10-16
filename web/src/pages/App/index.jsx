@@ -1,30 +1,39 @@
 import React from 'react'
 import { connect } from 'react-redux'
-import { compose, branch, renderNothing } from 'recompose'
+import { compose, renderNothing, mapProps } from 'recompose'
 import { callOnMount } from 'hocs'
 import { NavLink } from 'redux-first-router-link'
-import { ADD_LIST_ROUTE, goToList, goToAddList } from 'data/route/actions'
-import { getLists } from 'data/list/selectors'
+import { MAIN_ROUTE, LIST_ROUTE, ADD_LIST_ROUTE, goToList, goToAddList } from 'data/route/actions'
+import { getCurrentRoute } from 'data/route/selectors'
+import { getSortedLists } from 'data/list/selectors'
 import { fetchLists } from 'data/list/actions'
+import List from 'pages/List'
 
 const mapStateToProps = (state) => ({
-  lists: getLists(state),
+  route: getCurrentRoute(state),
+  lists: getSortedLists(state),
 })
 
 const mapDispatchToProps = (dispatch) => ({
   fetchLists: () => dispatch(fetchLists()),
 })
 
+const routeToComponentMap = {
+  [MAIN_ROUTE]: renderNothing(),
+  [LIST_ROUTE]: List,
+  [ADD_LIST_ROUTE]: renderNothing(),
+}
+
 const enhancer = compose(
   connect(mapStateToProps, mapDispatchToProps),
   callOnMount('fetchLists'),
-  branch(
-    ({ lists }) => lists.length === 0,
-    renderNothing,
-  ),
+  mapProps(({ route, ...props }) => ({
+    ...props,
+    Page: routeToComponentMap[route],
+  })),
 )
 
-const App = enhancer(({ lists }) => (
+const App = enhancer(({ Page, lists }) => (
   <main className="container">
     <div className="row justify-content-center mt-4">
       <div className="col-6">
@@ -56,6 +65,7 @@ const App = enhancer(({ lists }) => (
             </ul>
           </div>
           <div className="card-body">
+            <Page/>
           </div>
         </div>
       </div>

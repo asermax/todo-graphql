@@ -5,6 +5,7 @@ export const listsQuery = gql`
     lists {
       _id
       name
+      creationDate
     }
   }
 `
