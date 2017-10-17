@@ -3,8 +3,8 @@ import routeSaga from './route/sagas'
 import listSaga from './list/sagas'
 
 const sagas = [
-  routeSaga,
   listSaga,
+  routeSaga,
 ]
 
 export default function* rootSaga() {
