@@ -16,6 +16,7 @@
   },
   "devDependencies": {
     "babel-cli": "^6.x",
+    "babel-core": "^6.26.0",
     "babel-jest": "^21.x",
     "babel-loader": "^7.x",
     "babel-plugin-transform-object-rest-spread": "^6.x",
