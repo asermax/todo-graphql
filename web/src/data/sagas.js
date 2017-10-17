@@ -1,9 +1,11 @@
 import { fork } from 'redux-saga/effects'
-import routeSaga from './route/sagas'
 import listSaga from './list/sagas'
+import itemSaga from './item/sagas'
+import routeSaga from './route/sagas'
 
 const sagas = [
   listSaga,
+  itemSaga,
   routeSaga,
 ]
 
