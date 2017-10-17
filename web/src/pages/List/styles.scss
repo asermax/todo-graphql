@@ -1,3 +1,11 @@
-.custom-form-check {
-  margin-bottom: 0;
+.item {
+  &.done {
+    :global(.form-check-label) {
+      text-decoration: line-through;
+    }
+  }
+
+  :global(.form-check) {
+    margin-bottom: 0;
+  }
 }
