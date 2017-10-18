@@ -19,3 +19,9 @@ export const createItemMutation = gql`
     }
   }
 `
+
+export const deleteItemMutation = gql`
+  mutation deleteItem($listId: ID!, $id: ID!) {
+    deleted: deleteItem(listId: $listId, id: $id)
+  }
+`

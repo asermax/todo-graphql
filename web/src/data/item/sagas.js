@@ -4,9 +4,10 @@ import { getCurrentListId } from 'data/list/selectors'
 import {
   TOGGLE_ITEM_REQUEST, toggleItemSuccess, toggleItemFailure,
   ADD_ITEM_REQUEST, addItemSuccess, addItemFailure,
+  REMOVE_ITEM_REQUEST, removeItemSuccess, removeItemFailure,
 } from './actions'
 import { getAddingItem } from './selectors'
-import { toggleItemMutation, createItemMutation } from './mutations'
+import { toggleItemMutation, createItemMutation, deleteItemMutation } from './mutations'
 
 function* toggleItem(action) {
   try {
@@ -35,10 +36,30 @@ function* addItem() {
   }
 }
 
+function* removeItem(action) {
+  const listId = yield select(getCurrentListId)
+
+  try {
+    const { deleted } = yield call(api.mutate, deleteItemMutation, {
+      listId,
+      id: action.id,
+    })
+
+    if (deleted) {
+      yield put(removeItemSuccess(listId, action.id))
+    } else {
+      yield put(removeItemFailure('The item couldn\'t be deleted'))
+    }
+  } catch(error) {
+    yield put(removeItemFailure(error.message))
+  }
+}
+
 function* itemSaga() {
   yield [
     takeLatest(TOGGLE_ITEM_REQUEST, toggleItem),
     takeLatest(ADD_ITEM_REQUEST, addItem),
+    takeLatest(REMOVE_ITEM_REQUEST, removeItem),
   ]
 }
 

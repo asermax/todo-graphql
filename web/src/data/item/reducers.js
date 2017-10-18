@@ -1,6 +1,8 @@
 import { combineReducers } from 'redux'
 import { FETCH_LIST_SUCCESS } from 'data/list/actions'
-import { TOGGLE_ITEM_SUCCESS, CHANGE_ADDING_ITEM, ADD_ITEM_SUCCESS } from 'data/item/actions'
+import {
+  TOGGLE_ITEM_SUCCESS, CHANGE_ADDING_ITEM, ADD_ITEM_SUCCESS, REMOVE_ITEM_SUCCESS,
+} from 'data/item/actions'
 
 const all = (state = null, action) => {
   switch(action.type) {
@@ -23,6 +25,8 @@ const all = (state = null, action) => {
           ...action.item,
         },
       ]
+    case REMOVE_ITEM_SUCCESS:
+      return state.filter((item) => item._id !== action.id)
     default:
       return state
   }
