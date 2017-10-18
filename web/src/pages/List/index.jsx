@@ -3,7 +3,7 @@ import classNames from 'classnames'
 import { connect } from 'react-redux'
 import { compose, flattenProp, setDisplayName, withHandlers } from 'recompose'
 import { getCurrentList } from 'data/list/selectors'
-import { toggleItem, changeAddingItem, addItem } from 'data/item/actions'
+import { toggleItem, changeAddingItem, addItem, removeItem } from 'data/item/actions'
 import { getAddingItem } from 'data/item/selectors'
 import styles from './styles.scss'
 
@@ -16,6 +16,7 @@ const mapDispatchToProps = (dispatch) => ({
   toggleItem: (listId, id) => dispatch(toggleItem(listId, id)),
   changeAddingItem: (text) => dispatch(changeAddingItem(text)),
   addItem: () => dispatch(addItem()),
+  removeItem: (id) => dispatch(removeItem(id)),
 })
 
 const enhancer = compose(
@@ -32,7 +33,7 @@ const enhancer = compose(
 )
 
 const List = enhancer(({
-  _id, name, items, addingItem, changeAddingItem, handleKeyDown, toggleItem,
+  _id, name, items, addingItem, changeAddingItem, handleKeyDown, toggleItem, removeItem,
 }) => (
   <div>
     <div className="card-body">
@@ -67,6 +68,10 @@ const List = enhancer(({
               />
               {item.text}
             </label>
+            <i
+              className={classNames('fa', 'fa-trash', styles.delete)}
+              onClick={() => removeItem(item._id)}
+            />
           </div>
         </li>
       ))}

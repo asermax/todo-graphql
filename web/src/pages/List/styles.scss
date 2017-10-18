@@ -7,6 +7,23 @@
 
   :global(.form-check) {
     margin-bottom: 0;
+    display: flex;
+
+    :global(.form-check-label) {
+      flex-grow: 1;
+    }
+
+    .delete {
+      display: none;
+      line-height: 20px;
+      cursor: pointer;
+    }
+
+    &:hover {
+      .delete {
+        display: inherit;
+      }
+    }
   }
 }
 
