@@ -6,6 +6,7 @@ import { getSortedLists, getCurrentListId } from 'data/list/selectors'
 
 function* onInit() {
   yield put(fetchLists())
+  yield* onRoute()
 }
 
 function* onMainRoute() {
@@ -40,7 +41,6 @@ function* onRoute() {
 function* routeSaga() {
   yield [
     fork(onInit),
-    fork(onRoute),
     takeLatest(allRoutes, onRoute),
   ]
 }
