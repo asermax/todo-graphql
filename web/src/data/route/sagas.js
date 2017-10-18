@@ -1,12 +1,19 @@
 import { put, take, select, fork, takeLatest } from 'redux-saga/effects'
-import { allRoutes, MAIN_ROUTE, LIST_ROUTE, goToList, goToAddList } from './actions'
-import { getCurrentRoute } from './selectors'
+import {
+  allRoutes, MAIN_ROUTE, LIST_ROUTE, routesInitialized , goToList, goToAddList,
+} from './actions'
+import { isInit, getCurrentRoute } from './selectors'
 import { fetchLists, fetchList, FETCH_LISTS_SUCCESS } from 'data/list/actions'
 import { getSortedLists, getCurrentListId } from 'data/list/selectors'
 
 function* onInit() {
-  yield put(fetchLists())
-  yield* onRoute()
+  const initialized = yield select(isInit)
+
+  if (!initialized) {
+    yield put(fetchLists())
+    yield* onRoute()
+    yield put(routesInitialized())
+  }
 }
 
 function* onMainRoute() {

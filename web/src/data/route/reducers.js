@@ -1,5 +1,5 @@
 import { combineReducers } from 'redux'
-import { allRoutes } from './actions'
+import { allRoutes, ROUTES_INITIALIZED } from './actions'
 
 const current = (state = null, action) => {
   if (allRoutes.includes(action.type)) {
@@ -9,6 +9,16 @@ const current = (state = null, action) => {
   }
 }
 
+const isInit = (state = false, action) => {
+  switch(action.type) {
+    case ROUTES_INITIALIZED:
+      return true
+    default:
+      return state
+  }
+}
+
 export default combineReducers({
   current,
+  isInit,
 })

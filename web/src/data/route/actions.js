@@ -1,7 +1,12 @@
+export const ROUTES_INITIALIZED = 'ROUTES_INITIALIZED'
 export const MAIN_ROUTE = 'MAIN_ROUTE'
 export const LIST_ROUTE = 'LIST_ROUTE'
 export const ADD_LIST_ROUTE = 'ADD_LIST_ROUTE'
 export const allRoutes = [ MAIN_ROUTE, LIST_ROUTE, ADD_LIST_ROUTE ]
+
+export const routesInitialized = () => ({
+  type: ROUTES_INITIALIZED,
+})
 
 export const goToMain = () => ({
   type: MAIN_ROUTE,
