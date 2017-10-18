@@ -1,7 +1,12 @@
-import { call, put, takeLatest } from 'redux-saga/effects'
+import { call, put, select, takeLatest } from 'redux-saga/effects'
 import * as api from 'data/api'
-import { TOGGLE_ITEM_REQUEST, toggleItemSuccess, toggleItemFailure } from './actions'
-import { toggleItemMutation } from './mutations'
+import { getCurrentListId } from 'data/list/selectors'
+import {
+  TOGGLE_ITEM_REQUEST, toggleItemSuccess, toggleItemFailure,
+  ADD_ITEM_REQUEST, addItemSuccess, addItemFailure,
+} from './actions'
+import { getAddingItem } from './selectors'
+import { toggleItemMutation, createItemMutation } from './mutations'
 
 function* toggleItem(action) {
   try {
@@ -15,9 +20,25 @@ function* toggleItem(action) {
   }
 }
 
+function* addItem() {
+  const listId = yield select(getCurrentListId)
+  const text = yield select(getAddingItem)
+
+  try {
+    const { item } = yield call(api.mutate, createItemMutation, {
+      listId,
+      text,
+    })
+    yield put(addItemSuccess(listId, item))
+  } catch(error) {
+    yield put(addItemFailure(error.message))
+  }
+}
+
 function* itemSaga() {
   yield [
     takeLatest(TOGGLE_ITEM_REQUEST, toggleItem),
+    takeLatest(ADD_ITEM_REQUEST, addItem),
   ]
 }
 

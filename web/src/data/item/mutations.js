@@ -8,3 +8,14 @@ export const toggleItemMutation = gql`
     }
   }
 `
+
+export const createItemMutation = gql`
+  mutation createItem($listId: ID!, $text: String!) {
+    item: createItem(listId: $listId, text: $text) {
+      _id
+      text
+      creationDate
+      done
+    }
+  }
+`

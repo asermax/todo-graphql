@@ -22,7 +22,9 @@ export const getCurrentList = createSelector(
       list = lists.find((list) => list._id === id)
       list = {
         ...list,
-        items: items != null ? list.items.map((id) => items.find((item) => item._id === id)) : [],
+        items: items != null ?
+          list.items.map((id) => items.find((item) => item._id === id)).reverse() :
+          [],
       }
     }
 
