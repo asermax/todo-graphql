@@ -9,3 +9,17 @@
     margin-bottom: 0;
   }
 }
+
+.item-input {
+  padding: 0;
+  padding-left: 25px;
+
+  :global(.form-group) {
+    margin-bottom: 0;
+
+    :global(.form-control) {
+      border: none;
+      font-size: 28px;
+    }
+  }
+}
