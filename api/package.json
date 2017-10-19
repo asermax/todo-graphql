@@ -18,12 +18,13 @@
     "eslint": "^4.2.0",
     "express": "^4.x",
     "graphql": "^0.x",
+    "graphql-mongodb-projection": "^1.0.7",
     "graphql-server-express": "^1.x",
     "graphql-tools": "^1.x",
     "mongoose": "^4.x"
   },
   "devDependencies": {
-    "babel-cli": "^6.x",
+    "babel-core": "^6.26.0",
     "babel-loader": "^7.x",
     "babel-plugin-transform-object-rest-spread": "^6.x",
     "babel-preset-env": "^1.6.0",
