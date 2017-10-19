@@ -26,9 +26,8 @@ export const fetchListsFailure = (reason) => ({
   reason,
 })
 
-export const fetchList = (id) => ({
+export const fetchList = () => ({
   type: FETCH_LIST_REQUEST,
-  id,
 })
 
 export const fetchListSuccess = (list) => ({

@@ -20,9 +20,11 @@ function* fetchLists() {
   }
 }
 
-function* fetchList(action) {
+function* fetchList() {
+  const id = yield select(getCurrentListId)
+
   try {
-    const response = yield call(api.query, listQuery, { id: action.id })
+    const response = yield call(api.query, listQuery, { id })
     yield put(fetchListSuccess(response.list))
   } catch (e) {
     yield put(fetchListFailure(e.message))
