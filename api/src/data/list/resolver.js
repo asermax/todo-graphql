@@ -10,7 +10,7 @@ const resolver = {
           .select(infoToProjection(info))
           .exec()
       },
-      list(_, { id }, context, info) {
+      list(obj, { id }, context, info) {
         return List
           .findById(id)
           .select(infoToProjection(info))
