@@ -10,9 +10,11 @@ import { getAddingItem } from './selectors'
 import { toggleItemMutation, createItemMutation, deleteItemMutation } from './mutations'
 
 function* toggleItem(action) {
+  const listId = yield select(getCurrentListId)
+
   try {
     const { item } = yield call(api.mutate, toggleItemMutation, {
-      listId: action.listId,
+      listId,
       id: action.id,
     })
     yield put(toggleItemSuccess(item))

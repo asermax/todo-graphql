@@ -9,9 +9,8 @@ export const REMOVE_ITEM_REQUEST = 'REMOVE_ITEM_REQUEST'
 export const REMOVE_ITEM_SUCCESS = 'REMOVE_ITEM_SUCCESS'
 export const REMOVE_ITEM_FAILURE = 'REMOVE_ITEM_FAILURE'
 
-export const toggleItem = (listId, id) => ({
+export const toggleItem = (id) => ({
   type: TOGGLE_ITEM_REQUEST,
-  listId,
   id,
 })
 

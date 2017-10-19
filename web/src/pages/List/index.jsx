@@ -14,7 +14,7 @@ const mapStateToProps = (state) => ({
 })
 
 const mapDispatchToProps = (dispatch) => ({
-  toggleItem: (listId, id) => dispatch(toggleItem(listId, id)),
+  toggleItem: (id) => dispatch(toggleItem(id)),
   changeAddingItem: (text) => dispatch(changeAddingItem(text)),
   addItem: () => dispatch(addItem()),
   removeItem: (id) => dispatch(removeItem(id)),
@@ -53,7 +53,7 @@ const List = enhancer(({
                 className="form-check-input"
                 type="checkbox"
                 checked={item.done}
-                onChange={() => toggleItem(_id, item._id)}
+                onChange={() => toggleItem(item._id)}
               />
               {item.text}
             </label>
