@@ -1,5 +1,7 @@
 import { combineReducers } from 'redux'
-import { FETCH_LISTS_SUCCESS, FETCH_LIST_SUCCESS } from './actions'
+import {
+  FETCH_LISTS_SUCCESS, FETCH_LIST_SUCCESS, CHANGE_ADDING_LIST, ADD_LIST_SUCCESS,
+} from './actions'
 import { ADD_ITEM_SUCCESS, REMOVE_ITEM_SUCCESS } from 'data/item/actions'
 import { allRoutes, LIST_ROUTE } from 'data/route/actions'
 
@@ -42,6 +44,13 @@ const all = (state = null, action) => {
         },
       ]
     }
+    case ADD_LIST_SUCCESS:
+      return [
+        ...state,
+        {
+          ...action.list,
+        },
+      ]
     default:
       return state
   }
@@ -60,7 +69,20 @@ const currentId = (state = null, action) => {
   }
 }
 
+const defaultAdding = ''
+const adding = (state = defaultAdding, action) => {
+  switch(action.type) {
+    case CHANGE_ADDING_LIST:
+      return action.text
+    case ADD_LIST_SUCCESS:
+      return defaultAdding
+    default:
+      return state
+  }
+}
+
 export default combineReducers({
   all,
   currentId,
+  adding,
 })
