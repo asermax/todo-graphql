@@ -2,6 +2,7 @@ import React from 'react'
 import classNames from 'classnames'
 import { connect } from 'react-redux'
 import { compose, flattenProp, setDisplayName } from 'recompose'
+import { removeList } from 'data/list/actions'
 import { getCurrentList } from 'data/list/selectors'
 import { toggleItem, changeAddingItem, addItem, removeItem } from 'data/item/actions'
 import { getAddingItem } from 'data/item/selectors'
@@ -14,6 +15,7 @@ const mapStateToProps = (state) => ({
 })
 
 const mapDispatchToProps = (dispatch) => ({
+  removeList: () => dispatch(removeList()),
   toggleItem: (id) => dispatch(toggleItem(id)),
   changeAddingItem: (text) => dispatch(changeAddingItem(text)),
   addItem: () => dispatch(addItem()),
@@ -27,17 +29,24 @@ const enhancer = compose(
 )
 
 const List = enhancer(({
-  _id, name, items, addingItem, changeAddingItem, addItem, toggleItem, removeItem,
+  name, items, addingItem, removeList, changeAddingItem, addItem, toggleItem, removeItem,
 }) => (
   <div>
     <div className="card-body">
-      <h4 className="card-title">
+      <h4 className={classNames('card-title', styles.listNameContainer)}>
+        <span className={styles.listName}>
         {name}
+        </span>
+        <i
+          className={classNames('fa', 'fa-trash', styles.listDelete)}
+          onClick={removeList}
+        />
       </h4>
     </div>
     <ul className="list-group list-group-flush">
       <li className={classNames('list-group-item', styles.itemInputContainer)}>
         <ItemInput
+          autoFocus
           value={addingItem}
           onChange={(event) => changeAddingItem(event.target.value)}
           onSubmit={addItem}
@@ -58,7 +67,7 @@ const List = enhancer(({
               {item.text}
             </label>
             <i
-              className={classNames('fa', 'fa-trash', styles.delete)}
+              className={classNames('fa', 'fa-trash', styles.itemDelete)}
               onClick={() => removeItem(item._id)}
             />
           </div>

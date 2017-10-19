@@ -1,3 +1,21 @@
+.list-name-container {
+  display: flex;
+
+  .list-name {
+    padding-right: 10px;
+  }
+
+  .list-delete {
+    display: none;
+  }
+
+  &:hover {
+    .list-delete {
+      display: inherit;
+    }
+  }
+}
+
 .item {
   &.done {
     :global(.form-check-label) {
@@ -13,14 +31,14 @@
       flex-grow: 1;
     }
 
-    .delete {
+    .item-delete {
       display: none;
       line-height: 20px;
       cursor: pointer;
     }
 
     &:hover {
-      .delete {
+      .item-delete {
         display: inherit;
       }
     }
