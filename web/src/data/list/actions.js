@@ -8,6 +8,9 @@ export const CHANGE_ADDING_LIST = 'CHANGE_ADDING_LIST'
 export const ADD_LIST_REQUEST = 'ADD_LIST_REQUEST'
 export const ADD_LIST_SUCCESS = 'ADD_LIST_SUCCESS'
 export const ADD_LIST_FAILURE = 'ADD_LIST_FAILURE'
+export const REMOVE_LIST_REQUEST = 'REMOVE_LIST_REQUEST'
+export const REMOVE_LIST_SUCCESS = 'REMOVE_LIST_SUCCESS'
+export const REMOVE_LIST_FAILURE = 'REMOVE_LIST_FAILURE'
 
 export const fetchLists = () => ({
   type: FETCH_LISTS_REQUEST,
@@ -55,5 +58,19 @@ export const addListSuccess = (list) => ({
 
 export const addListFailure = (reason) => ({
   type: ADD_LIST_FAILURE,
+  reason,
+})
+
+export const removeList = () => ({
+  type: REMOVE_LIST_REQUEST,
+})
+
+export const removeListSuccess = (id) => ({
+  type: REMOVE_LIST_SUCCESS,
+  id,
+})
+
+export const removeListFailure = (reason) => ({
+  type: REMOVE_LIST_FAILURE,
   reason,
 })

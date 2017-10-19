@@ -1,6 +1,7 @@
 import { combineReducers } from 'redux'
 import {
   FETCH_LISTS_SUCCESS, FETCH_LIST_SUCCESS, CHANGE_ADDING_LIST, ADD_LIST_SUCCESS,
+  REMOVE_LIST_SUCCESS,
 } from './actions'
 import { ADD_ITEM_SUCCESS, REMOVE_ITEM_SUCCESS } from 'data/item/actions'
 import { allRoutes, LIST_ROUTE } from 'data/route/actions'
@@ -51,6 +52,8 @@ const all = (state = null, action) => {
           ...action.list,
         },
       ]
+    case REMOVE_LIST_SUCCESS:
+      return state.filter((list) => list._id !== action.id)
     default:
       return state
   }

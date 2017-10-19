@@ -9,3 +9,9 @@ export const createListMutation = gql`
     }
   }
 `
+
+export const deleteListMutation = gql`
+  mutation deleteList($id: ID!) {
+    deleted: deleteList(id: $id)
+  }
+`
