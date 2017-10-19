@@ -10,7 +10,6 @@ const definition = `
     _id: ID!
     text: String!
     done: Boolean!
-    note: String
     creationDate: Date!
   }
 `
