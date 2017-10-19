@@ -1,13 +1,20 @@
+import infoToProjection from 'graphql-mongodb-projection'
 import List from './model'
 
 const resolver = {
   root: {
     Query: {
-      lists() {
-        return List.find().exec()
+      lists(obj, args, context, info) {
+        return List
+          .find()
+          .select(infoToProjection(info))
+          .exec()
       },
-      list(_, { id }) {
-        return List.findById(id).exec()
+      list(_, { id }, context, info) {
+        return List
+          .findById(id)
+          .select(infoToProjection(info))
+          .exec()
       },
     },
     Mutation: {
