@@ -1,10 +1,11 @@
 import React from 'react'
 import classNames from 'classnames'
 import { connect } from 'react-redux'
-import { compose, flattenProp, setDisplayName, withHandlers } from 'recompose'
+import { compose, flattenProp, setDisplayName } from 'recompose'
 import { getCurrentList } from 'data/list/selectors'
 import { toggleItem, changeAddingItem, addItem, removeItem } from 'data/item/actions'
 import { getAddingItem } from 'data/item/selectors'
+import ItemInput from 'components/ItemInput'
 import styles from './styles.scss'
 
 const mapStateToProps = (state) => ({
@@ -21,19 +22,12 @@ const mapDispatchToProps = (dispatch) => ({
 
 const enhancer = compose(
   connect(mapStateToProps, mapDispatchToProps),
-  withHandlers({
-    handleKeyDown: ({ addItem }) => (event) => {
-      if (event.key === 'Enter') {
-        addItem()
-      }
-    },
-  }),
   flattenProp('list'),
   setDisplayName('List'),
 )
 
 const List = enhancer(({
-  _id, name, items, addingItem, changeAddingItem, handleKeyDown, toggleItem, removeItem,
+  _id, name, items, addingItem, changeAddingItem, addItem, toggleItem, removeItem,
 }) => (
   <div>
     <div className="card-body">
@@ -42,17 +36,12 @@ const List = enhancer(({
       </h4>
     </div>
     <ul className="list-group list-group-flush">
-      <li className={classNames('list-group-item', styles.itemInput)}>
-        <div className="form-group">
-          <input
-            className="form-control"
-            placeholder="Todo text"
-            type="text"
-            value={addingItem}
-            onChange={(event) => changeAddingItem(event.target.value)}
-            onKeyDown={handleKeyDown}
-          />
-        </div>
+      <li className={classNames('list-group-item', styles.itemInputContainer)}>
+        <ItemInput
+          value={addingItem}
+          onChange={(event) => changeAddingItem(event.target.value)}
+          onSubmit={addItem}
+        />
       </li>
       {items.map((item) => (
         <li key={item._id} className={classNames('list-group-item', styles.item, {

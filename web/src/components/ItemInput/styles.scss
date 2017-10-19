@@ -1,0 +1,12 @@
+.item-input {
+  :global(.form-group) {
+    margin-bottom: 0;
+
+    :global(.form-control) {
+      padding-left: 40px;
+      border: none;
+      border-radius: 0;
+      font-size: 28px;
+    }
+  }
+}
