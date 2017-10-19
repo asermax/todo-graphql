@@ -4,7 +4,7 @@ import { listDefinition, listResolver } from './list'
 
 const queryDefinition = `
   type Query {
-    lists: [List]
+    lists: [ List ]
     list(id: ID!): List
   }
 
