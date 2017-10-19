@@ -6,6 +6,7 @@ import { MAIN_ROUTE, LIST_ROUTE, ADD_LIST_ROUTE, goToList, goToAddList } from 'd
 import { getCurrentRoute } from 'data/route/selectors'
 import { getSortedLists } from 'data/list/selectors'
 import List from 'pages/List'
+import ListAdd from 'pages/ListAdd'
 
 const mapStateToProps = (state) => ({
   route: getCurrentRoute(state),
@@ -15,7 +16,7 @@ const mapStateToProps = (state) => ({
 const routeToComponentMap = {
   [MAIN_ROUTE]: renderNothing(),
   [LIST_ROUTE]: List,
-  [ADD_LIST_ROUTE]: renderNothing(),
+  [ADD_LIST_ROUTE]: ListAdd,
 }
 
 const enhancer = compose(

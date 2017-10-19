@@ -1,0 +1,16 @@
+.list {
+  .list-input-container {
+    margin: 0;
+
+    .list-input {
+      border: none;
+      padding: 0;
+      font-size: inherit;
+      line-height: inherit;
+    }
+  }
+
+  .item-input-container {
+    padding: 0;
+  }
+}
