@@ -1,20 +1,8 @@
 version: '3'
 services:
-  proxy:
-    image: nginx:1.13-alpine
-    links:
-     - web
-    volumes:
-      - ./nginx.conf:/etc/nginx/conf.d/default.conf:ro
   api:
-    image: node:8.7-alpine
-    volumes:
-      - ./api:/opt/app
-    entrypoint: /opt/app/entrypoint.sh
     command: start
+  api-django:
+    command: manage runserver 0.0.0.0:8000
   web:
-    image: node:8.7-alpine
-    volumes:
-      - ./web:/opt/app
-    entrypoint: /opt/app/entrypoint.sh
     command: start

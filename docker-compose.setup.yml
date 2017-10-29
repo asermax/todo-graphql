@@ -1,14 +1,8 @@
 version: '3'
 services:
   api:
-    image: node:8.7-alpine
-    volumes:
-      - ./api:/opt/app
-    entrypoint: /opt/app/entrypoint.sh
     command: install
+  api-django:
+    command: pip install -r requirements.txt
   web:
-    image: node:8.7-alpine
-    volumes:
-      - ./web:/opt/app
-    entrypoint: /opt/app/entrypoint.sh
     command: install

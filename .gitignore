@@ -60,3 +60,7 @@ typings/
 # dist folders
 dist/
 api/gql_schema.json
+
+# python & django stuff
+api-django/db.sqlite3
+api-django/venv
