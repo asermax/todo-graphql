@@ -3,6 +3,9 @@ services:
   api:
     command: start
   api-django:
-    command: manage runserver 0.0.0.0:8000
+    command: gunicorn -b 0.0.0.0:8000
+                      --reload
+                      --env DJANGO_SETTINGS_MODULE="api.settings"
+                      api.wsgi:application
   web:
     command: start
